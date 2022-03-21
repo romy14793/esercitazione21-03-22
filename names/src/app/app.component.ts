@@ -7,9 +7,11 @@ import { Names } from './models/Names';
   styleUrls: ['./app.component.scss'],
 })
 export class AppComponent {
+  deleted!: boolean;
   nameFromForm!: Names;
   title = 'names';
-  sendName(name: Names) {
-    this.nameFromForm = name;
+
+  deleteNames(event: boolean) {
+    this.deleted = event;
   }
 }

@@ -5,10 +5,12 @@
     <th>Probabilità</th>
     <th>Count</th>
   </tr>
-  <tr>
-    <td>{{ nameFromForm.name }}</td>
-    <td>{{ nameFromForm.gender }}</td>
-    <td>{{ nameFromForm.probability }}</td>
-    <td>{{ nameFromForm.count }}</td>
+
+  <tr *ngFor="let singleName of receivedName; let i = index">
+    <td>{{ singleName.name }}</td>
+    <td>{{ singleName.gender }}</td>
+    <td>{{ singleName.probability }}</td>
+    <td>{{ singleName.count }}</td>
+    <td><button (click)="deleteName(i)">Delete</button></td>
   </tr>
 </table>

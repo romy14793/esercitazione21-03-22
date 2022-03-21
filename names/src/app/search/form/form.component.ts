@@ -1,5 +1,6 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
+import { BehaviorSubject, Subject } from 'rxjs';
 import { Names } from 'src/app/models/Names';
 import { SearchService } from 'src/app/shared/search.service';
 @Component({
@@ -9,10 +10,10 @@ import { SearchService } from 'src/app/shared/search.service';
 })
 export class FormComponent implements OnInit {
   name!: Names;
-  @Output() sendName = new EventEmitter<Names>();
+  arrayName: Names[] = [];
   constructor(private fb: FormBuilder, private searchService: SearchService) {}
   form = this.fb.group({
-    name: ['', Validators.required, Validators.minLength(1)],
+    name: ['', [Validators.required, Validators.minLength(1)]],
   });
 
   ngOnInit(): void {}
@@ -21,7 +22,8 @@ export class FormComponent implements OnInit {
       .getData(this.form.get('name')?.value)
       .subscribe((response) => {
         this.name = response as Names;
-        this.sendName.emit(this.name);
+        this.arrayName.push(this.name);
+        this.searchService.subject.next(this.arrayName);
       });
   }
 }
