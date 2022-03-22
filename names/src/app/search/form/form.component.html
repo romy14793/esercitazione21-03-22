@@ -1,4 +1,14 @@
-<form [formGroup]="form" (ngSubmit)="onSubmit()">
-  <input type="text" name="name" formControlName="name" />
-  <button type="submit">Ricerca</button>
+<form
+  [formGroup]="form"
+  (ngSubmit)="onSubmit()"
+  class="d-flex flex-column align-items-center border border-1 m-4 p-4"
+>
+  <input
+    type="text"
+    name="name"
+    formControlName="name"
+    placeholder="Inserire nome..."
+    class="rounded border border-secondary mb-4 w-25 p-2"
+  />
+  <button type="submit" class="btn btn-info text-white w-25">Ricerca</button>
 </form>

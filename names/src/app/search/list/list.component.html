@@ -1,16 +1,29 @@
-<table>
-  <tr>
-    <th>Nome</th>
-    <th>Genere</th>
-    <th>Probabilità</th>
-    <th>Count</th>
-  </tr>
+<div class="container d-flex justify-content-center">
+  <table class="w-100 text-center">
+    <tr *ngIf="receivedName.length > 0">
+      <th>Nome</th>
+      <th>Genere</th>
+      <th>Probabilità</th>
+      <th>Count</th>
+      <th>Date and Hour</th>
+    </tr>
 
-  <tr *ngFor="let singleName of receivedName; let i = index">
-    <td>{{ singleName.name }}</td>
-    <td>{{ singleName.gender }}</td>
-    <td>{{ singleName.probability }}</td>
-    <td>{{ singleName.count }}</td>
-    <td><button (click)="deleteName(i)">Delete</button></td>
-  </tr>
-</table>
+    <tr
+      *ngFor="let singleName of receivedName; let i = index"
+      [ngClass]="{
+        high: singleName.probability > 0.7,
+        medium: singleName.probability < 0.7 && singleName.probability > 0.4,
+        low: singleName.probability < 0.4
+      }"
+    >
+      <td>{{ singleName.name }}</td>
+      <td>{{ singleName.gender }}</td>
+      <td>{{ singleName.probability }}</td>
+      <td>{{ singleName.count }}</td>
+      <td>{{ date | date: "dd/MM/yyyy, h:mm a" }}</td>
+      <td>
+        <button (click)="deleteName(i)" class="btn btn-danger">Delete</button>
+      </td>
+    </tr>
+  </table>
+</div>

@@ -14,5 +14,6 @@ export class NavbarComponent implements OnInit {
   ngOnInit(): void {}
   deleteAllName() {
     this.deleteNames.emit(this.delete);
+    this.delete = !this.delete;
   }
 }
